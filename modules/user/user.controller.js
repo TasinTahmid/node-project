@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const users = JSON.parse(fs.readFileSync("./model/data.json", { encoding: 'utf8', flag: 'r' }));
+const users = JSON.parse(fs.readFileSync("./modules/user/user.model.json", { encoding: 'utf8', flag: 'r' }));
 
 const getUsers = (req, res) => {
 
@@ -49,9 +49,9 @@ const updateUser = (req, res) => {
         return user;
     });
 
-    fs.writeFileSync("./model/data.json", JSON.stringify(updatedUsers));
+    fs.writeFileSync("./modules/user/user.model.json", JSON.stringify(updatedUsers));
 
-    res.statusCode = 201;
+    res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.write(JSON.stringify(newUser));
     res.end();
@@ -65,7 +65,7 @@ const createUser = (req, res) => {
 
     users.push(user);
 
-    fs.writeFileSync("./model/data.json", JSON.stringify(users));
+    fs.writeFileSync("./modules/user/user.model.json", JSON.stringify(users));
 
     res.statusCode = 201;
     res.setHeader("Content-Type", "application/json");
@@ -85,8 +85,7 @@ const deleteUser = (req, res) => {
         return;
     }
     const deletedUser = users.splice(index, 1)[0];
-    console.log('del:', deletedUser);
-    fs.writeFileSync("./model/data.json", JSON.stringify(users));
+    fs.writeFileSync("./modules/user/user.model.json", JSON.stringify(users));
 
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");

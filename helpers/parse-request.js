@@ -20,8 +20,9 @@ module.exports = (req, cb) => {
 
     req.on('end', () => {
         body += decoder.end();
+        body = body && JSON.parse(body);
 
-        cb({body:JSON.parse(body), method, route, baseUrl, paramId})
+        cb({body, method, route, baseUrl, paramId})
     });
 }
 

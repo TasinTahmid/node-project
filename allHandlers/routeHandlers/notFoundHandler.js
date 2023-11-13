@@ -1,7 +1,8 @@
-module.exports = (reqProps, cb) => {
+module.exports = (req, res) => {
 
-    console.log('in',reqProps)
-    cb(500, {
-        message: 'This is a errorr only.'
-    });
+    res.statusCode = 400;
+    res.setHeader("Content-Type", "application/json");
+    res.write(JSON.stringify({"messege": "Bad request"}));
+    res.end();
+
 }
